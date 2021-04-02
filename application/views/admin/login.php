@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Riau Pos</title>
+        <title>CMS Admin</title>
 
         <link rel="icon" href="<?php echo base_url('media/ico/favicon.png'); ?>" type="image/x-icon">
 
@@ -42,7 +42,7 @@
                         </span>
                         <div class=" panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Riau Pos | LOGIN</h3>
+                                <h3 class="panel-title">CMS | LOGIN</h3>
                             </div>
                             <div class="panel-body">
                                 <img src="">
@@ -67,7 +67,7 @@
                                         <!-- Change this to a button or input when using this as a form -->
                                         <input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
                                         <br>
-                                        <h3 class="panel-title"><center>&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> | PT.Riau Pos Intermedia</center></h3>
+                                        <h3 class="panel-title"><center>&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> | CMS</center></h3>
                                     </fieldset>
                                 </form>
                             </div>
