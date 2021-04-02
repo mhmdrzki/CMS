@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 02 Apr 2021 pada 17.33
+-- Waktu pembuatan: 02 Apr 2021 pada 20.50
 -- Versi server: 8.0.23-0ubuntu0.20.04.1
 -- Versi PHP: 7.4.3
 
@@ -49,15 +49,18 @@ CREATE TABLE `mobil` (
   `tahun_buat` varchar(255) DEFAULT NULL,
   `harga` varchar(255) DEFAULT NULL,
   `stok` varchar(255) DEFAULT NULL,
-  `foto` varchar(255) DEFAULT NULL
+  `foto` varchar(255) DEFAULT NULL,
+  `create_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data untuk tabel `mobil`
 --
 
-INSERT INTO `mobil` (`id`, `brand`, `kode_sku`, `merek`, `tahun_buat`, `harga`, `stok`, `foto`) VALUES
-(1, 'Toyota', 'TYT200', '2sdf', '2000', '1790000', '2', 'toyota-rush1.jpg');
+INSERT INTO `mobil` (`id`, `brand`, `kode_sku`, `merek`, `tahun_buat`, `harga`, `stok`, `foto`, `create_at`, `update_at`) VALUES
+(1, 'Toyota', 'TYT200', '3df', '2000', '179000000', '3', 'toyota-rush1.jpg', NULL, '2021-04-02 19:34:59'),
+(12, 'Daihatsu', 'DHS22', 'MBW', '2020', '999999999', '2', NULL, '2021-04-02 19:49:12', '2021-04-02 19:49:12');
 
 -- --------------------------------------------------------
 
@@ -70,15 +73,17 @@ CREATE TABLE `users` (
   `jenis_kelamin` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `nama` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `jenis_kelamin`, `nama`, `password`, `email`) VALUES
-(2, 'adminroy', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@example.com');
+INSERT INTO `users` (`id`, `jenis_kelamin`, `nama`, `password`, `email`, `create_at`, `update_at`) VALUES
+(14, 'L', 'Muhamad Rezki', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'mrezki2019@gmail.com', NULL, '2021-04-02 19:26:27');
 
 --
 -- Indexes for dumped tables
@@ -111,13 +116,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `mobil`
 --
 ALTER TABLE `mobil`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

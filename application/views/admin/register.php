@@ -42,45 +42,48 @@
                         </span>
                         <div class=" panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">CMS | LOGIN</h3>
+                                <h3 class="panel-title">Register</h3>
                             </div>
                             <div class="panel-body">
-                                <img src="">
-                                <form role="form" action="<?php echo site_url('admin/auth/login') ?>" method="post">
-                                    <?php
-                                    echo form_open(current_url(), array('role' => 'form', 'class' => 'form-signin'));
-                                    if (isset($_GET['location'])) {
-                                        echo '<input type="hidden" name="location" value="';
-                                        if (isset($_GET['location'])) {
-                                            echo htmlspecialchars($_GET['location']);
-                                        }
-                                        echo '" />';
-                                    }
-                                    ?>
+                                <?php echo validation_errors(); ?>
+
+                                <?php echo form_open_multipart(current_url()); ?>
                                     <fieldset>
                                         <div class="form-group">
-                                            <input class="form-control" required placeholder="Email" name="email" type="text" autofocus required>
+                                            <input class="form-control"  placeholder="Nama Lengkap" name="nama" type="text" autofocus >
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" required placeholder="Password" name="password" type="password"  required>
+                                        <div class="col-md-6">
+                                            <center><input type="radio" name="jenis_kelamin" value="L"> Laki-Laki</center>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="radio" name="jenis_kelamin" value="P"> Perempuan
+                                        </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                             <br>
+                                              <br>
+                                            <input class="form-control"  placeholder="Email" name="email" type="email"  >
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control"  placeholder="Password" name="password" type="password"  >
                                         </div>
                                         <!-- Change this to a button or input when using this as a form -->
                                         <div class="col-md-6">
-                                            <input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
+                                            <a href="<?=base_url()?>" class="btn btn-lg btn-primary btn-block">Kembali</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="<?=base_url()?>admin/users/register" class="btn btn-lg btn-primary btn-block" value="Login">Register</a>
+                                            <input type="submit" class="btn btn-lg btn-success btn-block" value="Register">
                                         </div>
+                                        
                                         <br>
                                         <h3 class="panel-title" style="margin-top: 40px"><center>&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> | CMS</center></h3>
                                     </fieldset>
-                                </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
-                    <?php if ($this->session->flashdata('failed')) { ?>
-                        <div class="alert alert-warning"><center><?php echo $this->session->flashdata('failed')?></center></div>
-                            <?php } ?>
                 </div>
             </div>
         </div>

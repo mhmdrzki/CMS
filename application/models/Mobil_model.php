@@ -17,14 +17,21 @@ class Mobil_model extends CI_Model {
 
     // Get From Databases
     function get($id = null)
-    {   if ($id) {
+    {   
+        if ($id) {
         $this->db->where('id', $id);
-    }
+        }
 
         return $result = $this->db->get('mobil');
     }
 
-    // Add and update to database
+    function getBy($params)
+    {   
+        $this->db->like($params);
+
+        return $this->db->get('mobil')->result_array();
+    }
+
     function add($data = array()) {
         $this->db->set($data);
         return $this->db->insert('mobil');
@@ -32,8 +39,9 @@ class Mobil_model extends CI_Model {
 
     function edit($data = array(), $id) {
         $this->db->where('id', $id);
+        $this->db->where('create_at IS NOT NULL');
 
-        return $this->db->update('mobil', $data);;
+        return $this->db->update('mobil', $data);
 
     }
 

@@ -7,11 +7,19 @@
             <a href="<?=base_url()?>admin/mobil/add" class="btn btn-sm btn-default"  ><i class="glyphicon glyphicon-plus"></i> Tambah</a>               
         </span>
 <div>
-    <?php echo form_open(current_url(), array('method' => 'get')) ?>
+    <?php echo form_open(base_url().'admin/mobil/search', array('method' => 'post')) ?>
     <div class="row">                
-        <div class="col-md-3">                 
-            <input autofocus type="text" name="n" id="field" placeholder="Nama" class="form-control">            
-        </div>                
+        <div class="col-md-2">                 
+            <select name="jenis" class="form-control">
+                <option value="brand">Brand</option>
+                <option value="merek">Merek</option>
+                <option value="tahun">Tahun</option>
+                <option value="harga">Harga</option>
+            </select>           
+        </div>
+        <div class="col-md-3" style="margin-left: 0;padding-left: 0">                 
+            <input autofocus type="text" name="keyword"  placeholder="Pencarian" class="form-control">            
+        </div>                   
         <input type="submit" class="btn btn-success" value="Cari">
     </div>
 </div>

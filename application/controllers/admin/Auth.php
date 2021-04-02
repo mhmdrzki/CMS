@@ -53,7 +53,7 @@ class Auth extends CI_Controller {
             $password = $this->input->post('password', TRUE);
             $this->db->from('users');
             $this->db->where('email', $email);
-            $this->db->where('password', sha1($password));
+            $this->db->where('password', hash ( "sha256",$password));
             
             $query = $this->db->get();
 

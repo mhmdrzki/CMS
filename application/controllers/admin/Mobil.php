@@ -16,32 +16,35 @@ class Mobil extends CI_Controller {
 
     // Mobil view in list
     public function index($offset = NULL) {
-        $this->load->library('pagination');
-        // Apply Filter
-        // Get $_GET variable
-        $f = $this->input->get(NULL, TRUE);
 
-        $data['f'] = $f;
+        $data['result'] = $this->Mobil_model->get()->result_array();
+        $data['title'] = 'Mobil';
+        $data['main'] = 'admin/mobil/index';
+        $this->load->view('admin/layout', $data);
+    }
 
-        $params = array();
-        // kode Mobil
-        if (isset($f['n']) && !empty($f['n']) && $f['n'] != '') {
-            $params['create_at'] = $f['n'];
+    public function search($offset = NULL) {
+
+        $jenis = $this->input->post('jenis');
+        $query = $this->input->post('keyword');
+
+        if ($jenis == 'brand') {
+            $keyword = array('brand' => $query);
         }
 
-        $paramsPage = $params;
-        $params['limit'] = 10;
-        $params['offset'] = $offset;
-        $params['order_by'] = 'creat_at';
-        $data['result'] = $this->Mobil_model->get()->result_array();
-        
-        $config['per_page'] = 10;
-        $config['uri_segment'] = 4;
-        $config['base_url'] = site_url('admin/mobil/index');
-        $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-        $config['total_rows'] = count($this->Mobil_model->get($paramsPage)->result_array());
-        $this->pagination->initialize($config);
+        if ($jenis == 'merek') {
+            $keyword = array('merek' => $query);
+        }
 
+        if ($jenis == 'tahun_buat') {
+            $keyword = array('tahun_buat' => $query);
+        }
+
+        if ($jenis == 'harga') {
+            $keyword = array('harga' => $query);
+        }
+        
+        $data['result'] = $this->Mobil_model->getBy($keyword);
         $data['title'] = 'Mobil';
         $data['main'] = 'admin/mobil/index';
         $this->load->view('admin/layout', $data);
@@ -86,10 +89,6 @@ class Mobil extends CI_Controller {
             $this->Mobil_model->add($data);
             $this->session->set_flashdata('success', 'Tambah data berhasil');
             redirect('admin/mobil');
-            
-
-            
-
                
         }
 
@@ -130,7 +129,7 @@ class Mobil extends CI_Controller {
             $this->load->library('upload', $config);
             $data = array('upload_data' => $this->upload->data());
 
-            if($data['file_name']){
+            if($this->upload->data('file_name')){
                 $data = array(
                 'brand' => $this->input->post('brand'),
                 'kode_sku' => $this->input->post('kode_sku'),
@@ -138,7 +137,7 @@ class Mobil extends CI_Controller {
                 'tahun_buat' => $this->input->post('tahun'),
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
-                'foto' => $data['file_name']
+                'foto' => $this->upload->data('file_name')
                 );   
             }else{
                 $data = array(
@@ -152,8 +151,17 @@ class Mobil extends CI_Controller {
             }
             
             
-           $this->Mobil_model->edit($data,$id);
-           $this->session->set_flashdata('success', 'Update data berhasil');
+           $query = $this->Mobil_model->edit($data,$id);
+
+      
+           if ($query) {
+               $this->session->set_flashdata('success', 'Update data berhasil');
+                        
+            } 
+            else
+            {
+               $this->session->set_flashdata('danger', 'Update data gagal');
+            }
            redirect('admin/mobil');
         }
 
