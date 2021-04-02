@@ -98,9 +98,8 @@ class Mobil extends CI_Controller {
     }
 
     public function edit($id = NULL) {
-        $data['result'] = $this->Mobil_model->get()->row();
+        $data['result'] = $this->Mobil_model->get($id)->row();
 
-        $dataSku = $this->Mobil_model->get()->row();
         if($this->input->post('kode_sku') != $data['result']->kode_sku) {
            $is_unique =  '|is_unique[mobil.kode_sku]';
         } else {

@@ -16,8 +16,11 @@ class Mobil_model extends CI_Model {
     }
 
     // Get From Databases
-    function get()
-    {
+    function get($id = null)
+    {   if ($id) {
+        $this->db->where('id', $id);
+    }
+
         return $result = $this->db->get('mobil');
     }
 
