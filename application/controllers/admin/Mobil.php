@@ -36,7 +36,7 @@ class Mobil extends CI_Controller {
             $keyword = array('merek' => $query);
         }
 
-        if ($jenis == 'tahun_buat') {
+        if ($jenis == 'tahun') {
             $keyword = array('tahun_buat' => $query);
         }
 
