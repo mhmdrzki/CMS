@@ -84,7 +84,7 @@ class Mobil extends CI_Controller {
             );
 
             $this->Mobil_model->add($data);
-
+            $this->session->set_flashdata('success', 'Tambah data berhasil');
             redirect('admin/mobil');
             
 
@@ -98,12 +98,20 @@ class Mobil extends CI_Controller {
     }
 
     public function edit($id = NULL) {
-        $this->form_validation->set_rules('kode_sku', 'Kode SKU', 'required|max_length[10]|is_unique[mobil.kode_sku]');
+        $data['result'] = $this->Mobil_model->get()->row();
+
+        $dataSku = $this->Mobil_model->get()->row();
+        if($this->input->post('kode_sku') != $data['result']->kode_sku) {
+           $is_unique =  '|is_unique[mobil.kode_sku]';
+        } else {
+           $is_unique =  '';
+        }
+
+        $this->form_validation->set_rules('kode_sku', 'Kode SKU', 'required|max_length[10]'.$is_unique);
         $this->form_validation->set_rules('merek', 'Merek', 'required|max_length[10]');
         $this->form_validation->set_rules('tahun', 'Tahun', 'required|max_length[4]');
         $this->form_validation->set_rules('harga', 'Harga', 'required|greater_than_equal_to[178000000]');
         $this->form_validation->set_rules('stok', 'Stok', 'required|max_length[4]');
-        $data['result'] = $this->Mobil_model->get()->row();
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -113,9 +121,9 @@ class Mobil extends CI_Controller {
         }
         else
         {
-           
-            $id = $this->input->post('id');
             
+            $id = $this->input->post('id');
+
             $config['upload_path']          = './media/images/';
             $config['allowed_types']        = 'gif|jpg|png';
             $config['min_width']             = 100;
@@ -123,18 +131,30 @@ class Mobil extends CI_Controller {
             $this->load->library('upload', $config);
             $data = array('upload_data' => $this->upload->data());
 
-            $data = array(
-            'brand' => $this->input->post('brand'),
-            'kode_sku' => $this->input->post('kode_sku'),
-            'merek' => $this->input->post('merek'),
-            'tahun_buat' => $this->input->post('tahun'),
-            'harga' => $this->input->post('harga'),
-            'stok' => $this->input->post('stok'),
-            'foto' => $data['file_name']
-            );
+            if($data['file_name']){
+                $data = array(
+                'brand' => $this->input->post('brand'),
+                'kode_sku' => $this->input->post('kode_sku'),
+                'merek' => $this->input->post('merek'),
+                'tahun_buat' => $this->input->post('tahun'),
+                'harga' => $this->input->post('harga'),
+                'stok' => $this->input->post('stok'),
+                'foto' => $data['file_name']
+                );   
+            }else{
+                $data = array(
+                'brand' => $this->input->post('brand'),
+                'kode_sku' => $this->input->post('kode_sku'),
+                'merek' => $this->input->post('merek'),
+                'tahun_buat' => $this->input->post('tahun'),
+                'harga' => $this->input->post('harga'),
+                'stok' => $this->input->post('stok'),
+                );   
+            }
+            
             
            $this->Mobil_model->edit($data,$id);
-           
+           $this->session->set_flashdata('success', 'Update data berhasil');
            redirect('admin/mobil');
         }
 
