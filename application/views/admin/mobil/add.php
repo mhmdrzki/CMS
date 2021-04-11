@@ -37,7 +37,7 @@
                     <input type="text" name="stok" placeholder="Stok" class="form-control" value=""><br>
 
                     <label >Foto*</label>
-                    <input type="file" name="userfile" size="20" placeholder="Foto" class="form-control" value=""><br>
+                    <input type="file" name="userfile" size="20" value="upload" placeholder="Foto" class="form-control" value=""><br>
                     
 
                     

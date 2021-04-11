@@ -15,7 +15,7 @@ class Mobil extends CI_Controller {
     }
 
     // Mobil view in list
-    public function index($offset = NULL) {
+    public function index() {
 
         $data['result'] = $this->Mobil_model->get()->result_array();
         $data['title'] = 'Mobil';
@@ -23,7 +23,7 @@ class Mobil extends CI_Controller {
         $this->load->view('admin/layout', $data);
     }
 
-    public function search($offset = NULL) {
+    public function search() {
 
         $jenis = $this->input->post('jenis');
         $query = $this->input->post('keyword');
@@ -74,21 +74,26 @@ class Mobil extends CI_Controller {
             $config['min_width']             = 100;
 
             $this->load->library('upload', $config);
-            $data = array('upload_data' => $this->upload->data());
+            $this->upload->initialize($config);
 
-            $data = array(
-            'brand' => $this->input->post('brand'),
-            'kode_sku' => $this->input->post('kode_sku'),
-            'merek' => $this->input->post('merek'),
-            'tahun_buat' => $this->input->post('tahun'),
-            'harga' => $this->input->post('harga'),
-            'stok' => $this->input->post('stok'),
-            'foto' => $data['file_name']
-            );
+            if ($this->upload->do_upload('userfile'))
+            {
+                $upload = array('upload_data' => $this->upload->data());
+                $data = array(
+                    'brand' => $this->input->post('brand'),
+                    'kode_sku' => $this->input->post('kode_sku'),
+                    'merek' => $this->input->post('merek'),
+                    'tahun_buat' => $this->input->post('tahun'),
+                    'harga' => $this->input->post('harga'),
+                    'stok' => $this->input->post('stok'),
+                    'foto' => $upload['upload_data']['file_name']
+                );
 
-            $this->Mobil_model->add($data);
-            $this->session->set_flashdata('success', 'Tambah data berhasil');
-            redirect('admin/mobil');
+                $this->Mobil_model->add($data);
+                $this->session->set_flashdata('success', 'Tambah data berhasil');
+                redirect('admin/mobil');
+            }
+
                
         }
 
@@ -127,9 +132,11 @@ class Mobil extends CI_Controller {
             $config['min_width']             = 100;
 
             $this->load->library('upload', $config);
-            $data = array('upload_data' => $this->upload->data());
+            $this->upload->initialize($config);
 
-            if($this->upload->data('file_name')){
+            if($this->upload->do_upload('userfile')){
+                $upload = array('upload_data' => $this->upload->data());
+
                 $data = array(
                 'brand' => $this->input->post('brand'),
                 'kode_sku' => $this->input->post('kode_sku'),
@@ -137,7 +144,7 @@ class Mobil extends CI_Controller {
                 'tahun_buat' => $this->input->post('tahun'),
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
-                'foto' => $this->upload->data('file_name')
+                'foto' => $upload['upload_data']['file_name']
                 );   
             }else{
                 $data = array(

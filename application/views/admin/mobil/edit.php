@@ -33,7 +33,7 @@
                     <input type="text" name="stok" value="<?= $result->stok;?>" placeholder="Stok" class="form-control" value=""><br>
 
                     <label >Foto*</label>
-                    <input type="file" name="userfile" placeholder="Foto" class="form-control" value=""><br>
+                    <input type="file" name="userfile" value="upload" class="form-control" value=""><br>
                     
 
                     
