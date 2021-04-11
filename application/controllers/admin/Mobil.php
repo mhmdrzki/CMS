@@ -160,7 +160,6 @@ class Mobil extends CI_Controller {
             
            $query = $this->Mobil_model->edit($data,$id);
 
-      
            if ($query) {
                $this->session->set_flashdata('success', 'Update data berhasil');
                         

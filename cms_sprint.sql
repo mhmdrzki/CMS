@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 02 Apr 2021 pada 20.50
+-- Waktu pembuatan: 11 Apr 2021 pada 17.54
 -- Versi server: 8.0.23-0ubuntu0.20.04.1
 -- Versi PHP: 7.4.3
 
@@ -59,8 +59,8 @@ CREATE TABLE `mobil` (
 --
 
 INSERT INTO `mobil` (`id`, `brand`, `kode_sku`, `merek`, `tahun_buat`, `harga`, `stok`, `foto`, `create_at`, `update_at`) VALUES
-(1, 'Toyota', 'TYT200', '3df', '2000', '179000000', '3', 'toyota-rush1.jpg', NULL, '2021-04-02 19:34:59'),
-(12, 'Daihatsu', 'DHS22', 'MBW', '2020', '999999999', '2', NULL, '2021-04-02 19:49:12', '2021-04-02 19:49:12');
+(1, 'Toyota', 'TYT222', 'sdfsd', '2011', '999999999', '2', 'toyota-rush1.jpg', '2021-04-02 19:34:59', '2021-04-02 19:34:59'),
+(14, 'Toyota', 'TYT111', 'sdfsd', '2011', '999999999', '2', 'Screenshot_from_2021-03-19_21-34-501.png', '2021-04-11 17:02:14', '2021-04-11 17:02:14');
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `jenis_kelamin`, `nama`, `password`, `email`, `create_at`, `update_at`) VALUES
-(14, 'L', 'Muhamad Rezki', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'mrezki2019@gmail.com', NULL, '2021-04-02 19:26:27');
+(14, 'L', 'Muhamad Rezki', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'mrezki2019@gmail.com', NULL, '2021-04-02 19:26:27'),
+(15, 'L', 'Muhamad Rezki', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin@example.com', '2021-04-11 16:53:32', '2021-04-11 16:53:32');
 
 --
 -- Indexes for dumped tables
@@ -116,13 +117,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `mobil`
 --
 ALTER TABLE `mobil`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
